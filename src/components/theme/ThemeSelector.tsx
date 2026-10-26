@@ -22,19 +22,22 @@ const DARK_QUERY = "(prefers-color-scheme: dark)";
 export function ThemeSelector() {
   // Start with "system" on server and first client render to avoid hydration mismatch.
   const [preference, setPreference] = useState<ThemePreference>("system");
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     setPreference(readStoredPreference());
+    setInitialized(true);
   }, []);
 
   useEffect(() => {
+    if (!initialized) return;
     const media = window.matchMedia(DARK_QUERY);
     const update = () => applyTheme(resolveTheme(preference, media.matches));
     update();
     if (preference !== "system") return;
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
-  }, [preference]);
+  }, [initialized, preference]);
 
   const select = (next: ThemePreference) => {
     storePreference(next);
