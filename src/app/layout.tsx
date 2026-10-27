@@ -56,7 +56,7 @@ export default function RootLayout({
                   Portfolio Gallery
                 </h1>
               </Link>
-              <nav className="flex items-center gap-3 sm:gap-6">
+              <nav className="flex flex-wrap items-center gap-3 sm:gap-6">
                 <Link href="/gallery" className="nav-link">
                   Gallery
                 </Link>
