@@ -5,7 +5,10 @@
 			"url": "https://api.githubcopilot.com/mcp/",
 			"tools": [
 				"*"
-			]
+			],
+			"headers": {
+		        "X-MCP-Toolsets": "default,copilot_spaces"
+      		}
 		}
 	}
 }
