@@ -13,6 +13,7 @@ interface GalleryGridProps {
   selectedTags?: string[];
   searchQuery?: string;
   currentPage?: number;
+  viewMode?: 'grid' | 'list';
 }
 
 export function GalleryGrid({ 
@@ -22,7 +23,8 @@ export function GalleryGrid({
   isLoading = false,
   selectedTags = [],
   searchQuery = "",
-  currentPage = 1
+  currentPage = 1,
+  viewMode = 'grid'
 }: GalleryGridProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [likedPhotos, setLikedPhotos] = useState<Set<string>>(new Set());
@@ -66,20 +68,22 @@ export function GalleryGrid({
   return (
     <div className={`w-full ${className}`}>
       {/* Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'flex flex-col gap-4'}>
         {displayedPhotos.map((photo, index) => (
           <motion.div
             key={photo.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="group relative card-elevated overflow-hidden"
+            className={`group relative card-elevated overflow-hidden ${viewMode === 'list' ? 'flex flex-col sm:flex-row' : ''}`}
           >
             {/* Photo Container */}
-            <div className="relative aspect-[4/3] overflow-hidden">
+            <div className={`relative aspect-[4/3] overflow-hidden ${viewMode === 'list' ? 'sm:aspect-auto sm:min-h-48 sm:w-64 sm:shrink-0' : ''}`}>
               {/* Placeholder colored rectangles since we don't have actual images */}
               <div 
-                className={`w-full h-full ${
+                className={`h-full w-full ${
+                  viewMode === 'list' ? 'min-h-48' : ''
+                } ${
                   index % 6 === 0 ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
                   index % 6 === 1 ? 'bg-gradient-to-br from-green-400 to-green-600' :
                   index % 6 === 2 ? 'bg-gradient-to-br from-purple-400 to-purple-600' :
@@ -123,7 +127,7 @@ export function GalleryGrid({
             </div>
 
             {/* Photo Info */}
-            <div className="p-4">
+            <div className="flex-1 p-4">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2 truncate">
                 {photo.title}
               </h3>
