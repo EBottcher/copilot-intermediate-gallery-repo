@@ -207,3 +207,12 @@ function StatsSection({ stats }) {
   );
 }
 ```
+
+## Theming (Light / Dark / System)
+
+- `ThemeSelector` (`src/components/theme/ThemeSelector.tsx`) lives in the shared navigation in `src/app/layout.tsx`. It is a radio group (arrow keys move the selection) with an accessible "Theme" label.
+- Default is **System**. The choice is saved in `localStorage` under `theme-preference`; if storage is unavailable the theme still switches for the current session. In System mode, OS changes are followed live.
+- The resolved theme is a single `dark` class on `<html>`. Tailwind uses `@custom-variant dark (&:where(.dark, .dark *))`, and custom CSS in `globals.css` uses `:root.dark` instead of `prefers-color-scheme`. Write new dark styles with `dark:` utilities or `:root.dark`.
+- An inline script in `<head>` (`themeInitScript` in `src/lib/theme.ts`) applies the theme before first paint; `<html>` uses `suppressHydrationWarning`.
+- Tests: `npm test` (theme resolution, persistence, storage failure).
+- Manual checks: toggle each option on light and dark OS settings; reload and navigate between routes; change the OS theme while System is selected; block site storage and confirm switching works; tab through the selector.

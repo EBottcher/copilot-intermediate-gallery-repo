@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Link from "next/link";
 import { Camera } from "lucide-react";
+import { ThemeSelector } from "@/components/theme/ThemeSelector";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,7 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body
         className={`${geistSans.variable} antialiased`}
       >
@@ -34,7 +39,8 @@ export default function RootLayout({
                   Portfolio Gallery
                 </h1>
               </Link>
-              <nav className="flex items-center gap-6">
+              <nav className="flex flex-wrap items-center justify-end gap-3 sm:gap-6">
+                <ThemeSelector />
                 <Link href="/gallery" className="nav-link">
                   Gallery
                 </Link>
