@@ -33,8 +33,8 @@ export function ThemeToggle() {
       aria-pressed={isDark}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
-      <Icon className="h-4 w-4" aria-hidden="true" />
       <span className="hidden sm:inline">{isDark ? "Light mode" : "Dark mode"}</span>
+      <Icon className="h-4 w-4" aria-hidden="true" />
     </button>
   );
 }
