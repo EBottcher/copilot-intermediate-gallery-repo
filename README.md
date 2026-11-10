@@ -40,6 +40,12 @@ After finishing the demo, don't forget this quick follow-up:
 
 ## Getting Started
 
+## Theme
+
+The application follows your system color preference until you choose a theme with the sun/moon control in the header. Your choice is saved in `localStorage` and restored on subsequent visits. If browser storage is unavailable, the toggle still changes the theme for the current page.
+
+Tailwind `dark:` variants and shared component styles use the `dark` class on the document root; keep new dark styles aligned with this selector.
+
 ### Technical Requirements
 
 - **Node.js** v18 or newer
