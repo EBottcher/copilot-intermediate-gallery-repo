@@ -44,14 +44,14 @@ export default function RootLayout({
         {/* Navigation Header */}
         <header className="border-b bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm sticky top-0 z-40">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <Link href="/" className="flex items-center gap-2">
                 <Camera className="h-8 w-8 text-blue-600" />
                 <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
                   Portfolio Gallery
                 </h1>
               </Link>
-              <nav className="flex items-center gap-4 sm:gap-6">
+              <nav className="ml-auto flex flex-wrap items-center justify-end gap-3 sm:gap-6">
                 <Link href="/gallery" className="nav-link">
                   Gallery
                 </Link>
